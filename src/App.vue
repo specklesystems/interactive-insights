@@ -1,29 +1,30 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+// import { RouterLink, RouterView } from 'vue-router'
+import CanvasComponent from './components/CanvasComponent.vue'
 import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
-    <img
+  <!-- <header> -->
+  <!-- <img
       alt="Vue logo"
       class="logo"
       src="@/assets/logo.svg"
       width="125"
       height="125"
-    />
+    /> -->
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <!-- <div class="wrapper"> -->
+  <!-- <HelloWorld msg="You did it!" /> -->
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <!-- <nav> -->
+  <!-- <RouterLink to="/">Home</RouterLink> -->
+  <!-- <RouterLink to="/about">About</RouterLink> -->
+  <!-- </nav> -->
+  <!-- </div> -->
+  <!-- </header> -->
+  <CanvasComponent />
+  <!-- <RouterView /> -->
 </template>
 
 <style scoped>
