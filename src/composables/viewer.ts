@@ -13,9 +13,9 @@ export default function useViewer() {
 
   /**
    * Initialize the viewer
-   * @param element - HTMLElement to initialize the viewer on
+   * @param element - HTMLDivElement to initialize the viewer on
    */
-  async function init(element: HTMLElement) {
+  async function init(element: HTMLDivElement) {
     // Set the default viewer parameters
     const params = DefaultViewerParams
     params.showStats = false

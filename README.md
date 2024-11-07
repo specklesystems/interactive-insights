@@ -1,39 +1,42 @@
-# insights
 
-This template should help get you started developing with Vue 3 in Vite.
+#  Speckle - Interactive Insights workshop
 
-## Recommended IDE Setup
+This is the repo we will be using for the interactive insights workshop. It is not required to have this project running to follow the workshop. But if you want to follow along, or just play around with the viewer/code, you can clone this repo and run it locally.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+For the workshop, we will be building a simple app on top of the Speckle Viewer. You can find the documentation [here](https://speckle.guide/viewer/).
 
-## Type Support for `.vue` Imports in TS
+##  Requirements
+This demo project is built with Vue 3/TypeScript/Tailwind, but no tool-specific knowledge is required to follow the workshop. The viewer itself is framework agnostic.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+#### Node
+In order to run the project you need to have Node (22/LTS) installed.
 
-## Customize configuration
+#### IDE
+You can use whichever IDE you prefer. Recommended is [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (disable Vetur).
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+##  Project Setup
 
-## Project Setup
-
+###  Install the dependencies
 ```sh
+
 npm install
+
 ```
 
-### Compile and Hot-Reload for Development
+###  Run the development server
 
 ```sh
-npm run dev
+
+npm run  dev
+
 ```
 
-### Type-Check, Compile and Minify for Production
+###  Build for production
+
+  
 
 ```sh
-npm run build
-```
 
-### Lint with [ESLint](https://eslint.org/)
+npm run  build
 
-```sh
-npm run lint
 ```
