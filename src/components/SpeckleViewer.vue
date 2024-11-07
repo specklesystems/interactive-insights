@@ -6,38 +6,13 @@
 
 <script lang="ts" setup>
 import { onMounted, useTemplateRef } from 'vue'
-import {
-  CameraController,
-  DefaultViewerParams,
-  SelectionExtension,
-  SpeckleLoader,
-  UrlHelper,
-  Viewer,
-} from '@speckle/viewer'
+import useViewer from '@/composables/viewer'
 
 const canvas = useTemplateRef('canvas')
+const { init: initViewer, viewer, loadModelFromUrl } = useViewer()
 
 onMounted(async () => {
-  const params = DefaultViewerParams
-  params.showStats = false
-  params.verbose = true
-
-  const viewer = new Viewer(canvas.value, params)
-  await viewer.init()
-
-  /** Add the stock camera controller extension */
-  viewer.createExtension(CameraController)
-  /** Add the selection extension for extra interactivity */
-  viewer.createExtension(SelectionExtension)
-
-  /** Create a loader for the speckle stream */
-  const urls = await UrlHelper.getResourceUrls(
-    'https://app.speckle.systems/projects/24c98619ac/models/38639656b8',
-  )
-  for (const url of urls) {
-    const loader = new SpeckleLoader(viewer.getWorldTree(), url, '')
-    /** Load the speckle data */
-    await viewer.loadObject(loader, true)
-  }
+  await initViewer(canvas.value)
+  await loadModelFromUrl('https://app.speckle.systems/projects/24c98619ac/models/38639656b8')
 })
 </script>
