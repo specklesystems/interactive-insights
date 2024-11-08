@@ -8,9 +8,9 @@ import {
   Viewer,
 } from '@speckle/viewer'
 
-export default function useViewer() {
-  const viewer = ref<Viewer | null>(null)
+let viewer: Viewer | null = null
 
+export default function useViewer() {
   /**
    * Initialize the viewer
    * @param element - HTMLDivElement to initialize the viewer on
@@ -22,11 +22,13 @@ export default function useViewer() {
     params.verbose = true
 
     // Create the viewer instance on the element
-    viewer.value = new Viewer(element, params)
+    viewer = new Viewer(element, params)
+
+    await viewer.init()
 
     // Add the stock camera controller and selection extensions
-    viewer.value.createExtension(CameraController)
-    viewer.value.createExtension(SelectionExtension)
+    viewer.createExtension(CameraController)
+    viewer.createExtension(SelectionExtension)
   }
 
   /**
@@ -34,12 +36,12 @@ export default function useViewer() {
    * @param url - The URL of the Speckle model
    */
   const loadModelFromUrl = async (url: string) => {
-    if (!viewer.value) return
+    if (!viewer) return
 
     const urls = await UrlHelper.getResourceUrls(url)
     urls.forEach(async (url) => {
-      const loader = new SpeckleLoader(viewer.value.getWorldTree(), url, '')
-      await viewer.value.loadObject(loader, true)
+      const loader = new SpeckleLoader(viewer.getWorldTree(), url, '')
+      await viewer.loadObject(loader, true)
     })
   }
 

@@ -1,6 +1,7 @@
 <template>
-  <main>
+  <main class="relative">
     <SpeckleViewer />
+    <ControlPanel />
   </main>
 </template>
 
