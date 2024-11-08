@@ -5,6 +5,7 @@ import {
   SpeckleText,
   SpeckleTextMaterial,
   Extension,
+  ProgressivePipeline,
 } from '@speckle/viewer'
 import potpack from 'potpack'
 import { Color, Matrix4, Vector3, Box3, DoubleSide, Group, Mesh } from 'three'
@@ -41,12 +42,21 @@ export class Catalogue extends Extension {
   }
 
   public animate(reverse: boolean = false) {
-    if (reverse) this.animationGroup.playReverse()
-    else this.animationGroup.play()
-    /** After the next release we'll do this*/
-    // this.viewer.getRenderer().resetPipeline(true)
+    if (!reverse) this.animationGroup.play()
+    else this.animationGroup.playReverse()
+
+    if (this.viewer.getRenderer().pipeline instanceof ProgressivePipeline) {
+      ;(
+        this.viewer.getRenderer().pipeline as ProgressivePipeline
+      ).onStationaryEnd()
+    }
     this.animationGroup.onComplete = () => {
-      this.viewer.getRenderer().resetPipeline()
+      if (this.viewer.getRenderer().pipeline instanceof ProgressivePipeline) {
+        ;(
+          this.viewer.getRenderer().pipeline as ProgressivePipeline
+        ).onStationaryBegin()
+        this.viewer.getRenderer().resetPipeline()
+      }
     }
   }
 

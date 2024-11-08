@@ -13,7 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@speckle/viewer": "^2.22.1",
+    "@speckle/viewer": "^2.22.2",
     "potpack": "2.0.0",
     "vue": "^3.5.12"
   },
