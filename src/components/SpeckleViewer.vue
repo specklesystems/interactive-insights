@@ -15,7 +15,7 @@ onMounted(async () => {
   if (!canvas.value) return
   await initViewer(canvas.value)
   await loadModelFromUrl(
-    'https://app.speckle.systems/projects/24c98619ac/models/38639656b8'
+    'https://app.speckle.systems/projects/24c98619ac/models/38639656b8',
   )
 })
 </script>

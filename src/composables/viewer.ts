@@ -39,7 +39,7 @@ export default function useViewer() {
     if (!viewer) return
 
     const urls = await UrlHelper.getResourceUrls(url)
-    urls.forEach(async (url) => {
+    urls.forEach(async url => {
       const loader = new SpeckleLoader(viewer.getWorldTree(), url, '')
       await viewer.loadObject(loader, true)
     })
