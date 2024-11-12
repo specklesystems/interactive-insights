@@ -6,16 +6,16 @@
 
 <script lang="ts" setup>
 import { onMounted, useTemplateRef } from 'vue'
-import useViewer from '@/composables/viewer'
+import useViewer from '@/composables/viewer/viewer'
 
 const canvas = useTemplateRef('canvas')
-const { init: initViewer, viewer, loadModelFromUrl } = useViewer()
+const { init: initViewer, addExtensions,loadModelFromUrl } = useViewer()
 
 onMounted(async () => {
-  if (!canvas.value) return
-  await initViewer(canvas.value)
-  await loadModelFromUrl(
-    'https://app.speckle.systems/projects/24c98619ac/models/38639656b8',
-  )
+    await initViewer(canvas.value)
+    addExtensions()
+    await loadModelFromUrl(
+      'https://app.speckle.systems/projects/24c98619ac/models/38639656b8'
+    )
 })
 </script>
