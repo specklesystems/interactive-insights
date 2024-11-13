@@ -5,11 +5,12 @@ import {
   FilteringExtension,
   SpeckleLoader,
   UrlHelper,
-  Viewer
+  Viewer,
+  ViewerEvent
 } from '@speckle/viewer'
 import { Catalogue } from '@/extensions/Catalogue'
 
-let viewer: Viewer | undefined = undefined
+export let viewer: Viewer | undefined = undefined
 
 export default function useViewer() {
   /**
@@ -25,6 +26,14 @@ export default function useViewer() {
 
     viewer = new Viewer(element, params)
     await viewer.init()
+
+    viewer.on(ViewerEvent.LoadComplete, async() => {
+      const properties = await viewer.getObjectProperties()
+      console.log('properties', properties)
+
+        // material.value = properties.find(property => property.key === 'renderMaterial.name')
+        // console.log('material', material.value)
+      })
   }
 
   /**
@@ -56,7 +65,6 @@ export default function useViewer() {
 
   return {
     init,
-    viewer,
     loadModelFromUrl,
     addExtensions
   }

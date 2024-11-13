@@ -1,16 +1,16 @@
 import useViewer from '@/composables/viewer/viewer'
 import { Catalogue, type CatalogueOptions } from '@/extensions/Catalogue'
 import { FilteringExtension } from '@speckle/viewer'
+import { viewer } from '@/composables/viewer/viewer'
 
 export default function useViewerActions() {
-  const { viewer } = useViewer()
-
   /**
    * Get the properties of the objects in the viewer
    * The exact properties returned depends on the objects in the viewer
    * @returns - List of properties in the viewer
    */
   const getObjectProperties = async () => {
+    console.log(viewer)
     if (!viewer) return
     return await viewer.getObjectProperties()
   }

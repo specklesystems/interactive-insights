@@ -15,7 +15,12 @@
         <h2 class="text-sm font-medium text-gray-800">Control Panel</h2>
       </div>
       <div class="py-3 px-4">
+
         <button @click="getProperties">Get materials</button>
+
+        <div v-for="(material, index) in materials?.valueGroups" :key="index">
+          <button @click="categorize([material])">{{ material.value }}</button>
+        </div>
       </div>
     </div>
   </div>
@@ -23,15 +28,17 @@
 
 <script setup lang="ts">
 import IconCog from './icon/IconCog.vue'
-import { ref } from 'vue'
-import useViewer from '@/composables/viewer/actions'
+import { ref, toRaw } from 'vue'
+import useViewerActions from '@/composables/viewer/actions';
 
-const { getObjectProperties } = useViewer()
+const { getObjectProperties, categorize } = useViewerActions()
 
 const isOpen = ref(false)
+const materials = ref(null)
 
 const getProperties = async () => {
   const properties = await getObjectProperties()
+  materials.value = properties.find(property => property.key === 'renderMaterial.name')
   console.log('properties', properties)
 }
 </script>
