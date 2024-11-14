@@ -1,25 +1,24 @@
 <template>
   <div class="absolute z-10 top-4 left-4 flex gap-x-2">
-    <button
-      @click="isOpen = !isOpen"
-      class="transition rounded-lg w-10 h-10 flex items-center justify-center shadow-md bg-white outline-none border"
-      :class="{ 'bg-gray-100': isOpen }"
-    >
-      <IconCog />
-    </button>
     <div
-      v-if="isOpen"
       class="bg-white rounded-xl overflow-hidden border border-outline-2 flex flex-col shadow-md min-w-72"
     >
       <div class="flex items-center py-3 px-4 border-b border-outline-2">
-        <h2 class="text-sm font-medium text-gray-800">Control Panel</h2>
+        <h2 class="text-sm font-medium text-gray-800">Levels</h2>
       </div>
       <div class="py-3 px-4">
-
-        <button @click="getProperties">Get materials</button>
-
-        <div v-for="(material, index) in materials?.valueGroups" :key="index">
-          <button @click="categorize([material])">{{ material.value }}</button>
+        <div class="flex gap-x-2">
+          <BaseButton @click="getLevels">Get levels</BaseButton>
+          <BaseButton @click="categorizeLevels">Categorize levels</BaseButton>
+          <BaseButton @click="uncategorizeLevels">Uncategorize levels</BaseButton>
+        </div>
+        <div v-if="levels" class="flex flex-col gap-y-2 text-sm mt-4 mb-2">
+          <div
+            v-for="(property, index) in levels?.valueGroups"
+            :key="`level-${index}`"
+          >
+            <button @click="isolate(property.ids)">{{ property.value }}</button>
+          </div>
         </div>
       </div>
     </div>
@@ -27,18 +26,33 @@
 </template>
 
 <script setup lang="ts">
-import IconCog from './icon/IconCog.vue'
-import { ref, toRaw } from 'vue'
-import useViewerActions from '@/composables/viewer/actions';
+import { ref } from 'vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
+import useViewer from '@/composables/viewer'
+import { properties } from '@/composables/viewer'
+import type { StringPropertyInfo, PropertyInfo } from '@speckle/viewer'
 
-const { getObjectProperties, categorize } = useViewerActions()
+const { categorize, isolate, animate, resetFilters } = useViewer()
 
-const isOpen = ref(false)
-const materials = ref(null)
+const levels = ref()
 
-const getProperties = async () => {
-  const properties = await getObjectProperties()
-  materials.value = properties.find(property => property.key === 'renderMaterial.name')
-  console.log('properties', properties)
+// Get all the properties with the key 'properties.Instance Parameters.Constraints.Level.value'
+const getLevels = async () => {
+  if (!properties) return
+  levels.value = properties.find((property: PropertyInfo) => property.key === 'properties.Instance Parameters.Constraints.Level.value')
+}
+
+// Categorize the levels and isolate the objects
+const categorizeLevels = async () => {
+  await getLevels()
+  categorize(levels.value.valueGroups)
+  isolate(levels.value.valueGroups.flatMap((group: StringPropertyInfo['valueGroups']) => group.ids))
+  animate()
+}
+
+// Reset filters and reverse the animation
+const uncategorizeLevels = async () => {
+  resetFilters()
+  animate({ reverse: true })
 }
 </script>
