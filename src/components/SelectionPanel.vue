@@ -7,7 +7,7 @@
         <h2 class="text-sm font-medium text-gray-800">Selection info</h2>
       </div>
       <div class="py-3 px-4 text-sm flex flex-col gap-y-1">
-        <template v-if="selectionInfo">
+        <!-- <template v-if="selectionInfo">
           <div>
             <span class="font-medium">ID:</span> {{ selectionInfo.id }}
           </div>
@@ -18,7 +18,7 @@
             <span class="font-medium">Level:</span> {{ selectionInfo.level.name }}
           </div>
         </template>
-        <p v-else class="text-sm text-gray-500">No selection</p>
+        <p v-else class="text-sm text-gray-500">No selection</p> -->
       </div>
     </div>
   </div>
