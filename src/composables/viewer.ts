@@ -19,7 +19,7 @@ export let properties: PropertyInfo[] | undefined = undefined
 const selectionInfo = ref(null)
 
 export default function useViewer() {
-  async function init(element: HTMLDivElement) {
+  const init = async (element: HTMLDivElement) => {
     // const params = {
     //   ...DefaultViewerParams,
     //   showStats: false,
@@ -45,7 +45,7 @@ export default function useViewer() {
     // })
   }
 
-  function addExtensions() {
+  const addExtensions = () => {
     // if (!viewer) return
     // viewer.createExtension(CameraController)
     // viewer.createExtension(SelectionExtension)
