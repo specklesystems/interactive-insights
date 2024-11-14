@@ -12,13 +12,16 @@
           <BaseButton @click="categorizeLevels">Categorize levels</BaseButton>
           <BaseButton @click="uncategorizeLevels">Uncategorize levels</BaseButton>
         </div>
-        <div v-if="levels" class="flex flex-col gap-y-2 text-sm mt-4 mb-2">
-          <div
+        <div v-if="levels" class="flex flex-col gap-y-2 items-start text-sm mt-4 mb-2">
+          <button
             v-for="(property, index) in levels?.valueGroups"
             :key="`level-${index}`"
+            class="hover:text-blue-600"
+            @click="isolate(property.ids)"
           >
-            <button @click="isolate(property.ids)">{{ property.value }}</button>
-          </div>
+            {{ property.value }}
+          </button>
+          <button class="font-medium hover:text-blue-600 mt-2" @click="resetFilters">Show all</button>
         </div>
       </div>
     </div>
