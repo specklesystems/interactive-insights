@@ -1,8 +1,8 @@
 <template>
   <main class="relative">
     <SpeckleViewer />
-    <ControlPanel />
-    <SelectionPanel />
+    <!-- <ControlPanel />
+    <SelectionPanel /> -->
   </main>
 </template>
 
