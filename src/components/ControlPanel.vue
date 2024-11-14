@@ -40,14 +40,14 @@ const { categorize, isolate, animate, resetFilters } = useViewer()
 const levels = ref()
 
 // Get all the properties with the key 'properties.Instance Parameters.Constraints.Level.value'
-const getLevels = async () => {
+const getLevels = () => {
   if (!properties) return
   levels.value = properties.find((property: PropertyInfo) => property.key === 'properties.Instance Parameters.Constraints.Level.value')
 }
 
 // Categorize the levels and isolate the objects
 const categorizeLevels = async () => {
-  await getLevels()
+  getLevels()
   categorize(levels.value.valueGroups)
   isolate(levels.value.valueGroups.flatMap((group: StringPropertyInfo['valueGroups']) => group.ids))
   animate()

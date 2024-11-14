@@ -23,7 +23,7 @@ export default function useViewer() {
    * Initialize the viewer
    * @param element - DOM element to initialize the viewer on
    */
-  async function init(element: HTMLDivElement) {
+  const init = async (element: HTMLDivElement) => {
     const params = {
       ...DefaultViewerParams,
       showStats: false,
@@ -57,7 +57,7 @@ export default function useViewer() {
    * The viewer can be extended with additional functionality by adding extensions
    * You can use extensions provided by the viewer, or create your own
    */
-  function addExtensions() {
+  const addExtensions = () => {
     if (!viewer) return
     viewer.createExtension(CameraController)
     viewer.createExtension(SelectionExtension)
