@@ -17,10 +17,10 @@ const MODELS = {
 }
 
 onMounted(async () => {
-  if (!canvas.value) return
+  // if (!canvas.value) return
 
-  await init(canvas.value)
-  addExtensions()
-  await loadModelFromUrl(MODELS.ONE)
+  // await init(canvas.value)
+  // addExtensions()
+  // await loadModelFromUrl(MODELS.ONE)
 })
 </script>
